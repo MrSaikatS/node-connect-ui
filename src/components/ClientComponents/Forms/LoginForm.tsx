@@ -30,15 +30,13 @@ const LoginForm = () => {
   });
 
   const userLoginFn = async (loginData: LoginFormType) => {
-    await authLogin(loginData);
-
-    await new Promise<void>((resolve) => setTimeout(resolve, 2000));
-
-    // console.log(loginData);
+    const isLoginSuccess = await authLogin(loginData);
 
     reset();
 
-    router.push("/profile");
+    if (isLoginSuccess) {
+      router.push("/profile");
+    }
   };
 
   return (

@@ -1,9 +1,10 @@
 "use client";
 
-import { darkAtom } from "@/utils/atoms";
+import { darkAtom } from "@/utils/helpers";
 import { NextUIProvider } from "@nextui-org/system";
-import { useAtom } from "jotai";
+import { Provider, useAtom } from "jotai";
 import { useEffect } from "react";
+import { Bounce, ToastContainer } from "react-toastify";
 
 type ProvidersProps = Readonly<{
   children: React.ReactNode;
@@ -22,11 +23,22 @@ export function Providers({ children }: ProvidersProps) {
 
   return (
     <>
-      <NextUIProvider>
-        <main>
-          {children}
-          </main>
-          </NextUIProvider>
+      <Provider>
+        <NextUIProvider>
+          <main>{children}</main>
+
+          <ToastContainer
+            position="top-center"
+            autoClose={1000}
+            newestOnTop={false}
+            closeOnClick
+            draggable
+            pauseOnHover
+            theme={dark ? "dark" : "light"}
+            transition={Bounce}
+          />
+        </NextUIProvider>
+      </Provider>
     </>
   );
 }

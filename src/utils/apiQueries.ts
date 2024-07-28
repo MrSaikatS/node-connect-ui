@@ -1,22 +1,32 @@
 import ky from "ky";
+import { toast } from "react-toastify";
 import { env } from "./env";
 import { LoginFormType } from "./types";
+import { fakeApiDelay } from "./helpers";
 
 export const authLogin = async (loginData: LoginFormType) => {
-  const request = await ky.post("login", {
-    prefixUrl: `${env.NEXT_PUBLIC_API_URL}/auth`,
-    credentials: "include",
-    mode: "cors",
-    json: {
-      email: loginData.email,
-      password: loginData.password,
-      mode: "session",
-    },
-  });
+  try {
+    const request = await ky.post("login", {
+      prefixUrl: `${env.NEXT_PUBLIC_API_URL}/auth`,
+      credentials: "include",
+      mode: "cors",
+      json: {
+        email: loginData.email,
+        password: loginData.password,
+        mode: "session",
+      },
+    });
 
-  console.log(request);
+    fakeApiDelay(1000);
 
-  const response = await request.json<any>();
+    if (request.ok) {
+      toast.success("Login Successful");
 
-  console.log(response);
+      return true;
+    }
+  } catch (error: any) {
+    let err = await error.response.json();
+
+    toast.error(err.errors[0].message);
+  }
 };

@@ -44,7 +44,7 @@ export const authLogout = async () => {
     fakeApiDelay(1000);
 
     if (request.ok) {
-      toast.success("Login Successful");
+      toast.success("Logout Successful");
       return true;
     }
   } catch (error: any) {

@@ -1,13 +1,12 @@
-import { cookies } from "next/headers";
+import PersonalProfile from "@/components/ServerComponents/PersonalProfile";
+import { Suspense } from "react";
 
 const page = () => {
-  const cookieStore = cookies();
-
-  console.log(cookieStore.getAll());
-
   return (
     <>
-      <div className=""></div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <PersonalProfile />
+      </Suspense>
     </>
   );
 };

@@ -1,5 +1,6 @@
 "use client";
 
+import Header from "@/components/ClientComponents/Header";
 import { darkAtom } from "@/utils/helpers";
 import { NextUIProvider } from "@nextui-org/system";
 import { Provider, useAtom } from "jotai";
@@ -25,10 +26,12 @@ export function Providers({ children }: ProvidersProps) {
     <>
       <Provider>
         <NextUIProvider>
+          <Header />
+
           <main>{children}</main>
 
           <ToastContainer
-            position="top-center"
+            position="bottom-center"
             autoClose={1000}
             newestOnTop={false}
             closeOnClick

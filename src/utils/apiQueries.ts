@@ -21,12 +21,35 @@ export const authLogin = async (loginData: LoginFormType) => {
 
     if (request.ok) {
       toast.success("Login Successful");
-
       return true;
     }
   } catch (error: any) {
     let err = await error.response.json();
+    toast.error(err.errors[0].message);
+  }
+};
 
+export const authLogout = async () => {
+  try {
+    const request = await ky.post("logout", {
+      prefixUrl: `${env.NEXT_PUBLIC_API_URL}/auth`,
+      credentials: "include",
+      mode: "cors",
+      json: {
+        refresh_token: "",
+        mode: "session",
+      },
+    });
+
+    fakeApiDelay(1000);
+
+    if (request.ok) {
+      toast.success("Login Successful");
+      return true;
+    }
+  } catch (error: any) {
+    //
+    let err = await error.response.json();
     toast.error(err.errors[0].message);
   }
 };

@@ -19,7 +19,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html
       lang="en"
-      className="">
+      className="dark">
       <body className={inter.className}>
         <Providers>{children}</Providers>
       </body>

@@ -1,3 +1,4 @@
+import ProfileDetailsSkeleton from "@/components/ServerComponents/ProfileDetailsSkeleton";
 import PublicProfile from "@/components/ServerComponents/PublicProfile";
 import { Suspense } from "react";
 
@@ -10,7 +11,7 @@ const page = ({ params }: PublicProfileProps) => {
 
   return (
     <>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<ProfileDetailsSkeleton selfProfile={false} />}>
         <PublicProfile />
       </Suspense>
     </>

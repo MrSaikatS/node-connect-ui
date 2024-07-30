@@ -1,10 +1,11 @@
 import PersonalProfile from "@/components/ServerComponents/PersonalProfile";
+import ProfileDetailsSkeleton from "@/components/ServerComponents/ProfileDetailsSkeleton";
 import { Suspense } from "react";
 
 const page = () => {
   return (
     <>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<ProfileDetailsSkeleton selfProfile={true} />}>
         <PersonalProfile />
       </Suspense>
     </>

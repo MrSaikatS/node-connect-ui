@@ -93,7 +93,7 @@ const LoginForm = () => {
             </Button>
 
             <Link
-              href={"/register"}
+              href={"/auth/register"}
               className="py-1 text-center text-xl underline">
               Create new account
             </Link>

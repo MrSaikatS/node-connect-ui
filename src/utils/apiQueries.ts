@@ -1,4 +1,4 @@
-import ky from "ky";
+import ky, { HTTPError } from "ky";
 import { toast } from "react-toastify";
 import { env } from "./env";
 import { LoginFormType } from "./types";
@@ -24,8 +24,14 @@ export const authLogin = async (loginData: LoginFormType) => {
       return true;
     }
   } catch (error: any) {
-    let err = await error.response.json();
-    toast.error(err.errors[0].message);
+    //
+    if (error.name === "HTTPError") {
+      const httpError = error as HTTPError;
+      const errorJson = await httpError.response.json<any>();
+      toast.error(errorJson.errors[0].message);
+    } else {
+      toast.error("Network Error");
+    }
   }
 };
 
@@ -49,7 +55,19 @@ export const authLogout = async () => {
     }
   } catch (error: any) {
     //
-    let err = await error.response.json();
-    toast.error(err.errors[0].message);
+    if (error.name === "HTTPError") {
+      const httpError = error as HTTPError;
+      const errorResponse = httpError.response;
+
+      if (errorResponse.status === 400 || errorResponse.status === 401) {
+        toast.success("Already logged out");
+        return true;
+      }
+
+      const errorJson = await errorResponse.json<any>();
+      toast.error(errorJson.errors[0].message);
+    } else {
+      toast.error("Network Error");
+    }
   }
 };

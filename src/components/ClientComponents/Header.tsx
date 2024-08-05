@@ -24,7 +24,7 @@ const Header = () => {
     }
   };
 
-  if (pathname !== "/" && pathname !== "/register") {
+  if (pathname !== "/auth/login" && pathname !== "/auth/register") {
     return (
       <>
         <Navbar isBordered>
@@ -33,7 +33,7 @@ const Header = () => {
               color="primary"
               variant="light"
               className="flex items-center gap-1 text-xl font-semibold"
-              onPress={() => router.replace("/feed")}>
+              onPress={() => router.replace("/")}>
               NodeConnect
             </Button>
           </NavbarBrand>
@@ -46,7 +46,7 @@ const Header = () => {
                 color="primary"
                 variant="light"
                 className="flex items-center gap-1"
-                onPress={() => router.replace("/feed")}
+                onPress={() => router.replace("/")}
                 startContent={<RiDashboardFill size={24} />}>
                 Feed
               </Button>
@@ -82,7 +82,7 @@ const Header = () => {
                 color="primary"
                 variant="light"
                 className="flex items-center gap-1"
-                onPress={() => router.replace("/feed")}
+                onPress={() => router.replace("/")}
                 startContent={<RiDashboardFill size={24} />}></Button>
             </NavbarItem>
             <NavbarItem>

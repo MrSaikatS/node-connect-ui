@@ -35,7 +35,7 @@ const LoginForm = () => {
     reset();
 
     if (isLoginSuccess) {
-      router.replace("/profile");
+      router.replace("/");
     }
   };
 

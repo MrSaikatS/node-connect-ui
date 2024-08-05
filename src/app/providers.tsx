@@ -32,7 +32,7 @@ export function Providers({ children }: ProvidersProps) {
 
           <ToastContainer
             position="bottom-center"
-            autoClose={1500}
+            autoClose={1200}
             newestOnTop={false}
             closeOnClick
             draggable
